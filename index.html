@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css"> 
+    <head>
+        <title>TotalComputers Protocol</title>
+    </head>
+    <body class="slide-up">
+        <div class="box" style="min-height: 2000px;">
+            <p>This page is WIP</p>
+            <h1>TotalComputers Protocol</h1>
+            <div class="subsection">
+                <h2>Types</h2>
+                <div class="subsection">
+                    <table>
+                        <tr>
+                            <th>Type</th>
+                            <th>Size in bytes</th>
+                            <th>Equivalent in C</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td>Byte</td>
+                            <td>1</td>
+                            <td>int8_t</td>
+                            <td>Signed 8-bit number</td>
+                        </tr>
+                        <tr>
+                            <td>Unsigned Byte</td>
+                            <td>1</td>
+                            <td>uint8_t</td>
+                            <td>Unsigned 8-bit number</td>
+                        </tr>
+                        <tr>
+                            <td>Short</td>
+                            <td>2</td>
+                            <td>int16_t</td>
+                            <td>Signed 16-bit number</td>
+                        </tr>
+                        <tr>
+                            <td>Unsigned Short</td>
+                            <td>2</td>
+                            <td>uint16_t</td>
+                            <td>Unsigned 16-bit number</td>
+                        </tr>
+                        <tr>
+                            <td>Integer</td>
+                            <td>4</td>
+                            <td>int32_t</td>
+                            <td>Signed 32-bit number</td>
+                        </tr>
+                        <tr>
+                            <td>Unsigned Integer</td>
+                            <td>4</td>
+                            <td>uint32_t</td>
+                            <td>Unsigned 32-bit number</td>
+                        </tr>
+                        <tr>
+                            <td>Long</td>
+                            <td>8</td>
+                            <td>int64_t</td>
+                            <td>Signed 64-bit number</td>
+                        </tr>
+                        <tr>
+                            <td>Unsigned Long</td>
+                            <td>8</td>
+                            <td>uint64_t</td>
+                            <td>Unsigned 64-bit number</td>
+                        </tr>
+                        <tr>
+                            <td>String</td>
+                            <td>4-2147483651</td>
+                            <td>uint32_t + char*</td>
+                            <td>Length prefixed (Unsigned Integer) UTF-8 encoded string</td>
+                        </tr>
+                    </table>
+                </div>
+                <h2>Packet structure</h2>
+                <div class="subsection">
+                    <table>
+                        <tr>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Description</th>
+                        </tr>
+                        <tr>
+                            <td>Packet ID</td>
+                            <td>Unsigned Byte</td>
+                            <td>See Packets section</td>
+                        </tr>
+                        <tr>
+                            <td>Magic Byte 1</td>
+                            <td>Byte</td>
+                            <td>Always 0x0A</td>
+                        </tr>
+                        <tr>
+                            <td>Magic Byte 2</td>
+                            <td>Byte</td>
+                            <td>Always 0x1F</td>
+                        </tr>
+                        <tr>
+                            <td>Data Length</td>
+                            <td>Integer</td>
+                            <td>Size of data in bytes</td>
+                        </tr>
+                        <tr>
+                            <td>Data</td>
+                            <td>Byte Sequence</td>
+                            <td>Depends on packet. See Packets section</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <h2>Packets</h2>
+            <div class="subsection">
+                <h2>Serverbound</h2>
+                <div class="subsection">
+                    <h3>Handshake Packet</h3>
+                    <div class="subsection">
+                        <table>
+                            <tr>
+                                <th>Packet ID</th>
+                                <th>Packet Data</th>
+                            </tr>
+                            <tr>
+                                <td>0xB0</td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <th>Field Name</th>
+                                            <th>Field Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Protocol version</td>
+                                            <td>Short</td>
+                                            <td>Protocol version. Current version: 1</td>
+                                        </tr>
+                                        <tr>
+                                            <td>API version</td>
+                                            <td>Short</td>
+                                            <td>API version. Current version: 8 (WIP)</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <h3>Connect Packet</h3>
+                    <div class="subsection">
+                        <table>
+                            <tr>
+                                <th>Packet ID</th>
+                                <th>Packet Data</th>
+                            </tr>
+                            <tr>
+                                <td>0xB3</td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <th>Field Name</th>
+                                            <th>Field Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Token</td>
+                                            <td>String</td>
+                                            <td>Player token</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <h3>Pong Packet</h3>
+                    <div class="subsection">
+                        <table>
+                            <tr>
+                                <th>Packet ID</th>
+                                <th>Packet Data</th>
+                            </tr>
+                            <tr>
+                                <td>0xB6</td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <th>Field Name</th>
+                                            <th>Field Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Payload</td>
+                                            <td>Long</td>
+                                            <td>Should be the same as in the ping packet. Used to calculate ping. If ping is greater than 1000, connection should be closed</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <h3>Creation Status Packet</h3>
+                    <div class="subsection">
+                        <table>
+                            <tr>
+                                <th>Packet ID</th>
+                                <th>Packet Data</th>
+                            </tr>
+                            <tr>
+                                <td>0xB8</td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <th>Field Name</th>
+                                            <th>Field Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Status</td>
+                                            <td>Byte Enum</td>
+                                            <td>See table below</td>
+                                        </tr>
+                                        <tr>
+                                            <td>ID</td>
+                                            <td>Short</td>
+                                            <td>Computer ID. 0 if status is 1 (STATUS_ERR)</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>Status Enum:</p>
+                        <table>
+                            <tr>
+                                <th>Name</th>
+                                <th>Value</th>
+                                <th>Description</th>
+                            </tr>
+                            <tr>
+                                <td>STATUS_OK</td>
+                                <td>0</td>
+                                <td>Clientbound OS was successfully created</td>
+                            </tr>
+                            <tr>
+                                <td>STATUS_ERR</td>
+                                <td>1</td>
+                                <td>An error occurred while creating clientbound OS</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <h2>Clientbound</h2>
+                <div class="subsection">
+                    <h3>Handshake Packet</h3>
+                    <div class="subsection">
+                        <table>
+                            <tr>
+                                <th>Packet ID</th>
+                                <th>Packet Data</th>
+                            </tr>
+                            <tr>
+                                <td>0xB1</td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <th>Field Name</th>
+                                            <th>Field Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Server Name</td>
+                                            <td>String</td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <h3>Disconnect Packet</h3>
+                    <div class="subsection">
+                        <table>
+                            <tr>
+                                <th>Packet ID</th>
+                                <th>Packet Data</th>
+                            </tr>
+                            <tr>
+                                <td>0xB2</td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <th>Field Name</th>
+                                            <th>Field Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Reason</td>
+                                            <td>String</td>
+                                            <td></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <h3>Connection Success Packet</h3>
+                    <div class="subsection">
+                        <table>
+                            <tr>
+                                <th>Packet ID</th>
+                                <th>Packet Data</th>
+                            </tr>
+                            <tr>
+                                <td>0xB4</td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <th>Field Name</th>
+                                            <th>Field Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Name</td>
+                                            <td>String</td>
+                                            <td>Player nickname</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <h3>Ping Packet</h3>
+                    <div class="subsection">
+                        <p>Server should send this packet every 15 seconds</p>
+                        <table>
+                            <tr>
+                                <th>Packet ID</th>
+                                <th>Packet Data</th>
+                            </tr>
+                            <tr>
+                                <td>0xB5</td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <th>Field Name</th>
+                                            <th>Field Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Payload</td>
+                                            <td>Long</td>
+                                            <td>System.currentTimeMillis()</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <h3>Creation Request Packet</h3>
+                    <div class="subsection">
+                        <table>
+                            <tr>
+                                <th>Packet ID</th>
+                                <th>Packet Data</th>
+                            </tr>
+                            <tr>
+                                <td>0xB7</td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <th>Field Name</th>
+                                            <th>Field Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Width</td>
+                                            <td>Short</td>
+                                            <td>Screen width in pixels</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Height</td>
+                                            <td>Short</td>
+                                            <td>Screen height in pixels</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Name</td>
+                                            <td>String</td>
+                                            <td>Computer name</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <h2></h2>
+            <h2>Connection Sequence</h2>
+            <div class="subsection">
+                <li><b>S -> S</b>: Handshake Packet (Clientbound)</li>
+                <li><b>C -> S</b>: Handshake Packet (Serverbound)</li>
+                <li><b>C -> S</b>: Connect Packet</li>
+                <li><b>S -> C</b>: Connection Success Packet</li>
+            </div>
+        </div> 
+    </body>
+</html>

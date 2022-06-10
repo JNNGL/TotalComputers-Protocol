@@ -1,0 +1,145 @@
+@font-face {
+    font-family: lato;
+    src: url(lato.ttf);
+}
+
+.box {
+    box-shadow: 
+        0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+        0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+        0 12.5px 10px rgba(0, 0, 0, 0.06),
+        0 22.3px 17.9px rgba(0, 0, 0, 0.072),
+        0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+        0 100px 80px rgba(0, 0, 0, 0.12)
+    ;
+    width: 90vw;
+    margin: 40px auto;
+    background: white;
+    border-radius: 10px;
+    text-align: left;
+    padding-top: 30px;
+    padding-bottom: 100px;
+    padding-left: 20px;
+    font-family: lato;
+}
+
+.slide-up {
+    opacity: 0;
+    position: relative;
+    top: 40px;
+    animation: slide-up ease-out 0.75s forwards;
+}
+
+@keyframes slide-up {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-40px); opacity: 1; }
+}
+
+button {
+    font-family: lato;
+    background-color: rgb(37, 99, 235);
+    font-weight: bold;
+    color: white;
+    padding: 10px 16px;
+    font-size: 1rem;
+    border-radius: .5rem;
+    transition: all .15s cubic-bezier(0.4,0,0.2,1);
+    border: none;
+    cursor: pointer;
+    box-shadow:
+        0px 0px 0.6px rgba(0, 0, 0, 0.027),
+        0px 0px 1.3px rgba(0, 0, 0, 0.035),
+        0px 0px 2.3px rgba(0, 0, 0, 0.041),
+        0px 0px 3.6px rgba(0, 0, 0, 0.044),
+        0px 0px 5.4px rgba(0, 0, 0, 0.046),
+        0px 0px 7.8px rgba(0, 0, 0, 0.046),
+        0px 0px 11.3px rgba(0, 0, 0, 0.046),
+        0px 0px 16.8px rgba(0, 0, 0, 0.044),
+        0px 0px 27.1px rgba(0, 0, 0, 0.04),
+        0px 0px 100px rgba(0, 0, 0, 0.03)
+    ;
+}
+
+button:hover {
+    background-color: rgb(31, 90, 251);
+    box-shadow:
+        0px 0.1px 0.3px rgba(0, 0, 0, 0.065),
+        0px 1.4px 3px rgba(0, 0, 0, 0.086),
+        0px 4.1px 8px rgba(0, 0, 0, 0.098),
+        0px 8.8px 15.7px rgba(0, 0, 0, 0.106),
+        0px 16.7px 27.9px rgba(0, 0, 0, 0.11),
+        0px 35px 55px rgba(0, 0, 0, 0.11)
+    ;
+}
+
+button:active {
+    position: relative;
+    top: 2px;
+    box-shadow:
+        0px 0.2px 2px rgba(0, 0, 0, 0.129),
+        0px 0.6px 4.9px rgba(0, 0, 0, 0.138),
+        0px 1.2px 9.1px rgba(0, 0, 0, 0.13),
+        0px 2.2px 16.3px rgba(0, 0, 0, 0.117),
+        0px 4.6px 30.5px rgba(0, 0, 0, 0.109),
+        0px 18px 73px rgba(0, 0, 0, 0.16)
+    ;
+}
+
+body {
+    background: #eef2f7;
+}
+
+::scrollbar {
+    display: none;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.subsection {
+    padding-left: 15px;
+}
+
+* {
+    font-family: lato;
+    color:black;
+}
+
+p,li {
+    font-size: 17px;
+}
+
+h1 {
+    font-size: 30px;
+}
+
+h2 {
+    font-size: 24px;
+}
+
+h3 {
+    font-size: 20px;
+}
+
+h4 {
+    font-size: 18px;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+td,th {
+    border: 0.5px solid #999;
+    text-align: left;
+    padding: 4px;
+}
+
+td {
+    background: #f9f9f9;
+}
+
+th {
+    background: #eee;
+}
