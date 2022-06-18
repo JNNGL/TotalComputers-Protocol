@@ -21,6 +21,12 @@
                             <th>Description</th>
                         </tr>
                         <tr>
+                            <td>Boolean</td>
+                            <td>1</td>
+                            <td>char</td>
+                            <td>8-bit number; 0 - false, 1 - true</td>
+                        </tr>
+                        <tr>
                             <td>Byte</td>
                             <td>1</td>
                             <td>int8_t</td>
@@ -248,6 +254,63 @@
                             </tr>
                         </table>
                     </div>
+                    <h3>Frame Packet</h3>
+                    <div class="subsection">
+                        <table>
+                            <tr>
+                                <th>Packet ID</th>
+                                <th>Packet Data</th>
+                            </tr>
+                            <tr>
+                                <td>0xC0</td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <th>Field Name</th>
+                                            <th>Field Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td>ID</td>
+                                            <td>Short</td>
+                                            <td>Computer ID</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Compressed Data</td>
+                                            <td>Deflated Array of Bytes</td>
+                                            <td>Deflated array of indexed 128x128 image bytes. Palette must be obtained from Clientbound Palette Packet</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <h3>Encryption Packet</h3>
+                    <div class="subsection">
+                        <table>
+                            <tr>
+                                <th>Packet ID</th>
+                                <th>Packet Data</th>
+                            </tr>
+                            <tr>
+                                <td>0xC4</td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <th>Field Name</th>
+                                            <th>Field Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Secret</td>
+                                            <td>Byte Sequence</td>
+                                            <td>AES secret key encrypted with public key (RSA/ECB/PKCS1Padding)</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                 </div>
                 <h2>Clientbound</h2>
                 <div class="subsection">
@@ -386,6 +449,150 @@
                                             <td>Name</td>
                                             <td>String</td>
                                             <td>Computer name</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <h3>Destroy Packet</h3>
+                    <div class="subsection">
+                        <table>
+                            <tr>
+                                <th>Packet ID</th>
+                                <th>Packet Data</th>
+                            </tr>
+                            <tr>
+                                <td>0xB9</td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <th>Field Name</th>
+                                            <th>Field Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td>ID</td>
+                                            <td>Short</td>
+                                            <td>Computer ID</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <h3>Palette Packet</h3>
+                    <div class="subsection">
+                        <table>
+                            <tr>
+                                <th>Packet ID</th>
+                                <th>Packet Data</th>
+                            </tr>
+                            <tr>
+                                <td>0xC1</td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <th>Field Name</th>
+                                            <th>Field Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Palette Length</td>
+                                            <td>Integer</td>
+                                            <td>Length of following array</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Palette</td>
+                                            <td>Integer Sequence</td>
+                                            <td>Screen palette. See Serverbound Frame Packet</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <h3>Touch Packet</h3>
+                    <div class="subsection">
+                        <table>
+                            <tr>
+                                <th>Packet ID</th>
+                                <th>Packet Data</th>
+                            </tr>
+                            <tr>
+                                <td>0xC2</td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <th>Field Name</th>
+                                            <th>Field Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td>ID</td>
+                                            <td>Short</td>
+                                            <td>Computer ID</td>
+                                        </tr>
+                                        <tr>
+                                            <td>X</td>
+                                            <td>Short</td>
+                                            <td>Absolute Java graphical X coordinate</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Y</td>
+                                            <td>Short</td>
+                                            <td>Absolute Java graphical Y coordinate</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Type</td>
+                                            <td>Byte Enum</td>
+                                            <td>See table below</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Admin Rights</td>
+                                            <td>Boolean</td>
+                                            <td>Whether or not player have admin rights</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                        <p>Type Enum:</p>
+                        <table>
+                            <tr>
+                                <th>Name</th>
+                                <th>Value</th>
+                            </tr>
+                            <tr>
+                                <td>LEFT_CLICK</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td>RIGHT_CLICK</td>
+                                <td>1</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <h3>Encryption Packet</h3>
+                    <div class="subsection">
+                        <table>
+                            <tr>
+                                <th>Packet ID</th>
+                                <th>Packet Data</th>
+                            </tr>
+                            <tr>
+                                <td>0xC3</td>
+                                <td>
+                                    <table>
+                                        <tr>
+                                            <th>Field Name</th>
+                                            <th>Field Type</th>
+                                            <th>Description</th>
+                                        </tr>
+                                        <tr>
+                                            <td>Public Key</td>
+                                            <td>Byte Sequence</td>
+                                            <td>Encoded RSA public key</td>
                                         </tr>
                                     </table>
                                 </td>
